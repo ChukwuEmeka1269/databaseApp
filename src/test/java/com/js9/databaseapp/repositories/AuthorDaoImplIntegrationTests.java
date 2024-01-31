@@ -1,7 +1,6 @@
-package com.js9.databaseapp.dao.impl;
+package com.js9.databaseapp.repositories;
 
 import com.js9.databaseapp.TestDataUtil;
-import com.js9.databaseapp.dao.AuthorDao;
 import com.js9.databaseapp.domain.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,19 +17,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class AuthorDaoImplIntegrationTests {
-    private AuthorDao authorDaoUnderTest;
+    private AuthorRepository authorDaoUnderTest;
 
     @Autowired
-    public AuthorDaoImplIntegrationTests(AuthorDao authorDao){
-        this.authorDaoUnderTest = authorDao;
+    public AuthorDaoImplIntegrationTests(AuthorRepository authorRepository){
+        this.authorDaoUnderTest = authorRepository;
     }
 
     @Test
     public void testThatAuthorCanBeCreatedAndReturned(){
 
         var author = TestDataUtil.createTestAuthorA();
-        authorDaoUnderTest.create(author);
-        Optional<Author> optionalAuthor = authorDaoUnderTest.findOne(1L);
+        authorDaoUnderTest.save(author);
+        Optional<Author> optionalAuthor = authorDaoUnderTest.findById(1L);
         assertThat(optionalAuthor).isPresent();
         assertThat(optionalAuthor.get()).isEqualTo(author);
 
@@ -44,11 +43,11 @@ public class AuthorDaoImplIntegrationTests {
         var authorB = TestDataUtil.createTestAuthorB();
         var authorC = TestDataUtil.createTestAuthorC();
 
-        authorDaoUnderTest.create(authorA);
-        authorDaoUnderTest.create(authorB);
-        authorDaoUnderTest.create(authorC);
+        authorDaoUnderTest.save(authorA);
+        authorDaoUnderTest.save(authorB);
+        authorDaoUnderTest.save(authorC);
 
-        assertThat(authorDaoUnderTest.find())
+        assertThat(authorDaoUnderTest.findAll())
                 .hasSize(3)
                 .containsExactly(authorA, authorB, authorC);
     }
@@ -57,14 +56,14 @@ public class AuthorDaoImplIntegrationTests {
     @Test
     public void testThatAuthorWithValidAuthorIdCanBeUpdated(){
         var author = TestDataUtil.createTestAuthorA();
-        authorDaoUnderTest.create(author);
+        authorDaoUnderTest.save(author);
 
         author.setName("UPDATED NAME");
         author.setAge(102);
 
-        authorDaoUnderTest.update(author.getId(), author);
+        authorDaoUnderTest.save(author);
 
-        Optional<Author> optionalAuthor = authorDaoUnderTest.findOne(author.getId());
+        Optional<Author> optionalAuthor = authorDaoUnderTest.findById(author.getId());
 
         assertThat(optionalAuthor).isPresent();
 
@@ -78,11 +77,11 @@ public class AuthorDaoImplIntegrationTests {
     @Test
     public void testThatAuthorCreatedCanBeDeleted(){
         var author = TestDataUtil.createTestAuthorA();
-        authorDaoUnderTest.create(author);
+        authorDaoUnderTest.save(author);
 
-        authorDaoUnderTest.delete(author.getId());
+        authorDaoUnderTest.deleteById(author.getId());
 
-        Optional<Author> optionalAuthor = authorDaoUnderTest.findOne(author.getId());
+        Optional<Author> optionalAuthor = authorDaoUnderTest.findById(author.getId());
 
         assertThat(optionalAuthor).isEmpty();
 
