@@ -16,11 +16,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class AuthorDaoImplIntegrationTests {
+public class AuthorRepositoryIntegrationTests {
     private AuthorRepository authorDaoUnderTest;
 
     @Autowired
-    public AuthorDaoImplIntegrationTests(AuthorRepository authorRepository){
+    public AuthorRepositoryIntegrationTests(AuthorRepository authorRepository){
         this.authorDaoUnderTest = authorRepository;
     }
 
