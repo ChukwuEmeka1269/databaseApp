@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -85,5 +86,42 @@ public class AuthorRepositoryIntegrationTests {
 
         assertThat(optionalAuthor).isEmpty();
 
+    }
+
+
+
+    @Test
+    public void testThatGetAuthorsWithAgeLessThan(){
+        var authorA = TestDataUtil.createTestAuthorA();
+        var authorB = TestDataUtil.createTestAuthorB();
+        var authorC = TestDataUtil.createTestAuthorC();
+
+
+        authorDaoUnderTest.save(authorA);
+        authorDaoUnderTest.save(authorB);
+        authorDaoUnderTest.save(authorC);
+
+
+        List<Author> authors =  authorDaoUnderTest.ageLessThan(50);
+
+        assertThat(authors).containsExactly(authorB, authorC);
+    }
+
+
+    @Test
+    public void testThatGetAuthorsGreaterThan(){
+        var authorA = TestDataUtil.createTestAuthorA();
+        var authorB = TestDataUtil.createTestAuthorB();
+        var authorC = TestDataUtil.createTestAuthorC();
+
+
+        authorDaoUnderTest.save(authorA);
+        authorDaoUnderTest.save(authorB);
+        authorDaoUnderTest.save(authorC);
+
+
+       List<Author> authors =  authorDaoUnderTest.findAuthorWithAgeGreaterThan(50);
+
+        assertThat(authors).containsExactly(authorA);
     }
 }

@@ -19,7 +19,7 @@ public final class TestDataUtil {
         return Author.builder()
                 .id(2L)
                 .name("Jane Doe")
-                .age(80)
+                .age(40)
                 .build();
     }
 
