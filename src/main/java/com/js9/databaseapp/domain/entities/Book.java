@@ -1,4 +1,4 @@
-package com.js9.databaseapp.domain;
+package com.js9.databaseapp.domain.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

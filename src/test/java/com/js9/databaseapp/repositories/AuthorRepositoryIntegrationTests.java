@@ -1,7 +1,7 @@
 package com.js9.databaseapp.repositories;
 
 import com.js9.databaseapp.TestDataUtil;
-import com.js9.databaseapp.domain.Author;
+import com.js9.databaseapp.domain.entities.Author;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

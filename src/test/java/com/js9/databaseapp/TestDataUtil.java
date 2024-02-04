@@ -1,7 +1,7 @@
 package com.js9.databaseapp;
 
-import com.js9.databaseapp.domain.Author;
-import com.js9.databaseapp.domain.Book;
+import com.js9.databaseapp.domain.entities.Author;
+import com.js9.databaseapp.domain.entities.Book;
 
 public final class TestDataUtil {
 

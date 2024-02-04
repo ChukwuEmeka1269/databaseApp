@@ -3,7 +3,7 @@ package com.js9.databaseapp.repositories;
 
 import com.js9.databaseapp.TestDataUtil;
 
-import com.js9.databaseapp.domain.Book;
+import com.js9.databaseapp.domain.entities.Book;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
