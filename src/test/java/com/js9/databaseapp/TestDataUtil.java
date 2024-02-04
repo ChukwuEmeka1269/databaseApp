@@ -62,4 +62,13 @@ public final class TestDataUtil {
                 .title("TEST 4")
                 .build();
     }
+
+
+    public static Book createTestBookDtoA(final Author author) {
+        return Book.builder()
+                .author(author)
+                .isbn("123-234-345-1")
+                .title("TEST BOOK DTO A")
+                .build();
+    }
 }
